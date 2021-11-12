@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=my-gtk-text-editor
+Exec=my-gtk-text-editor
+Icon=com.bernardigiri.TextEditor
+Terminal=false
+Type=Application
+Categories=GTK;
+StartupNotify=true

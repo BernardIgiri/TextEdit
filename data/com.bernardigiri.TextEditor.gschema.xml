@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemalist gettext-domain="my-gtk-text-editor">
+	<schema id="com.bernardigiri.TextEditor" path="/com/bernardigiri/TextEditor/">
+	</schema>
+</schemalist>

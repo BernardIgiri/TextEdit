@@ -1,0 +1,4 @@
+data/com.bernardigiri.TextEditor.desktop.in
+data/com.bernardigiri.TextEditor.appdata.xml.in
+data/com.bernardigiri.TextEditor.gschema.xml
+src/window.ui
