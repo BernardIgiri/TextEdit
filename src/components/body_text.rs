@@ -52,19 +52,18 @@ pub struct View {
 
 impl View {
     pub fn new(builder: &gtk::Builder) -> Self {
-        let widget = util::get_object(&builder, "body-text");
+        let widget = util::get_object(builder, "body-text");
         Self {
             widget,
             revision: 0,
         }
     }
     pub fn transmit(&self, tx: Sender<Action>) {
-        let tx_local = tx.clone();
         self.widget.connect_changed(move |body_text| {
             let start = body_text.get_start_iter();
             let end = body_text.get_end_iter();
-            let value = body_text.get_text(&start, &end, true).unwrap_or("".into()).to_string();
-            tx_local.send(Action::DocumentChanged(value)).ok();
+            let value = body_text.get_text(&start, &end, true).unwrap_or_else(|| "".into()).to_string();
+            tx.send(Action::DocumentChanged(value)).ok();
         });
     }
     pub fn refresh(&mut self, model: &Model) {

@@ -32,7 +32,7 @@ pub struct View {
 
 impl View {
     pub fn new(builder: &gtk::Builder) -> Self {
-        let widget: gtk::AboutDialog = util::get_object(&builder, "about-dialog");
+        let widget: gtk::AboutDialog = util::get_object(builder, "about-dialog");
         let version = format!("{} {}",
             gettextrs::gettext("Version"),
             config::VERSION,

@@ -63,12 +63,12 @@ pub struct View {
 
 impl View {
     pub fn new(builder: &gtk::Builder) -> Self {
-        let menu_new = util::get_object(&builder, "menu-new");
-        let menu_open = util::get_object(&builder, "menu-open");
-        let menu_save = util::get_object(&builder, "menu-save");
-        let menu_save_as = util::get_object(&builder, "menu-save-as");
-        let menu_quit = util::get_object(&builder, "menu-quit");
-        let menu_about = util::get_object(&builder, "menu-about");
+        let menu_new = util::get_object(builder, "menu-new");
+        let menu_open = util::get_object(builder, "menu-open");
+        let menu_save = util::get_object(builder, "menu-save");
+        let menu_save_as = util::get_object(builder, "menu-save-as");
+        let menu_quit = util::get_object(builder, "menu-quit");
+        let menu_about = util::get_object(builder, "menu-about");
         Self {
             menu_new,
             menu_open,
@@ -110,7 +110,7 @@ impl View {
             });
         }
         {
-            let tx_local = tx.clone();
+            let tx_local = tx;
             self.menu_about.connect_activate(move |_| {
                 tx_local.send(Action::About).ok();
             });

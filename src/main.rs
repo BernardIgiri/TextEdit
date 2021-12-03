@@ -11,10 +11,6 @@ use components::application;
 #[tokio::main]
 async fn main() {
     let args: Vec<String> = env::args().collect();
-    if args.len() > 1 && args[1].eq("-v") {
-        println!("{}", config::VERSION);
-        return;
-    }
     gtk::init().unwrap_or_else(|_| panic!("Failed to initialize GTK."));
 
     setlocale(LocaleCategory::LcAll, "");

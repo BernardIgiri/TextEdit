@@ -84,17 +84,13 @@ impl View {
         }
     }
     pub fn transmit(&self, tx: Sender<Action>) {
-        let tx_local = tx.clone();
         self.widget.connect_response(move |chooser, response_type| {
-            match response_type {
-                gtk::ResponseType::Accept => {
-                    let path = chooser.get_filename().unwrap();
-                    tx_local.send(Action::Accept(path)).ok();
-                },
-                _ => {
-                    tx_local.send(Action::Cancel).ok();
-                },
-            };
+            if let gtk::ResponseType::Accept = response_type {
+                let path = chooser.get_filename().unwrap();
+                tx.send(Action::Accept(path)).ok();
+            } else {
+                tx.send(Action::Cancel).ok();
+            }
         });
     }
     pub fn refresh(&mut self, model: &Model) {

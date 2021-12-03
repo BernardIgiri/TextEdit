@@ -48,7 +48,7 @@ impl Model {
         }
     }
     pub fn transmit(&mut self, tx: Sender<AppAction>) {
-        self.tx = Some(tx.clone());
+        self.tx = Some(tx);
     }
 }
 
@@ -59,7 +59,7 @@ pub struct View {
 
 impl View {
     pub fn new(builder: &gtk::Builder) -> Self {
-        let widget = util::get_object(&builder, "status-bar");
+        let widget = util::get_object(builder, "status-bar");
         Self {
             widget,
             revision: 0,

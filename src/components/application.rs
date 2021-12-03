@@ -48,30 +48,33 @@ impl Model {
         model
     }
 
+    async fn load_file_text(path: std::path::PathBuf) -> Result<String, ()> {
+        let data = tokio::fs::read(path).await.map_err(|_| ())?;
+        let document = String::from_utf8(data).map_err(|_| ())?;
+
+        Ok(document)
+    }
+
     fn load_file(path: std::path::PathBuf, tx: Sender<Action>) {
         tokio::spawn(async move {
-            match tokio::fs::read(path).await {
-                Ok(data) => {
-                    match String::from_utf8(data) {
-                        Ok(document) => {
-                            tx.send(
-                                Action::StatusBar(status_bar::Action::ClearStatus)
-                            ).ok();
-                            tx.send(
-                                Action::BodyText(
-                                    body_text::Action::LoadDocument(document)
-                                )
-                            ).ok();
-                        },
-                        Err(e) => {
-                            eprintln!("Data Error! {}", e);
-                        },
-                    };
-                },
-                Err(e) => {
-                    eprintln!("IO Error! {}", e);
-                },
-            };
+            if let Ok(document) = Self::load_file_text(path.clone()).await {
+                tx.send(
+                    Action::StatusBar(status_bar::Action::ClearStatus)
+                ).ok();
+                tx.send(
+                    Action::BodyText(
+                        body_text::Action::LoadDocument(document)
+                    )
+                ).ok();
+            } else {
+                let message = format!("{}: \"{}\"!",
+                    gettextrs::gettext("Could not open file"),
+                    path.to_str().unwrap_or(""),
+                );
+                tx.send(
+                    Action::StatusBar(status_bar::Action::SetStatus(message))
+                ).ok();
+            }
         });
     }
 
@@ -86,8 +89,14 @@ impl Model {
                     tx.send(Action::StatusBar(status_bar::Action::Toast(message))).ok();
                     tx.send(Action::BodyText(body_text::Action::DocumentSaved)).ok();
                 },
-                Err(e) => {
-                    eprintln!("IO Error! {}", e);
+                Err(_) => {
+                    let message = format!("{}: \"{}\"!",
+                        gettextrs::gettext("Could not save file"),
+                        path.to_str().unwrap_or(""),
+                    );
+                    tx.send(
+                        Action::StatusBar(status_bar::Action::SetStatus(message))
+                    ).ok();
                 },
             };
         });
@@ -114,11 +123,8 @@ impl Model {
             },
             Action::SaveFile(path) => {
                 let tx = self.tx.as_ref().unwrap();
-                match path {
-                    Some(p) => {
-                        self.file_path = Some(p);
-                    },
-                    None => (),
+                if let Some(p) = path {
+                    self.file_path = Some(p);
                 };
                 match self.file_path.clone() {
                     Some(p) => {
@@ -171,7 +177,7 @@ impl Model {
             });
         }
         {
-            let tx_local = tx.clone();
+            let tx_local = tx;
             let (child_tx, child_rx) = MainContext::channel(PRIORITY_DEFAULT);
             self.children.as_mut().unwrap().status_bar.transmit(child_tx);
             child_rx.attach(None, move |action| {
@@ -235,7 +241,7 @@ impl View {
             });
         }
         {
-            let tx_local = tx.clone();
+            let tx_local = tx;
             let (child_tx, child_rx) = MainContext::channel(PRIORITY_DEFAULT);
             self.menu.transmit(child_tx);
             child_rx.attach(None, move |action| {
