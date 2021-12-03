@@ -6,7 +6,7 @@
     "sdk-extensions" : [
         "org.freedesktop.Sdk.Extension.rust-stable"
     ],
-    "command" : "my-gtk-text-editor",
+    "command" : "textedit",
     "finish-args" : [
         "--share=network",
         "--share=ipc",
@@ -20,7 +20,7 @@
         ],
         "env" : {
             "RUST_BACKTRACE" : "1",
-            "RUST_LOG" : "my-gtk-text-editor=debug"
+            "RUST_LOG" : "textedit=debug"
         }
     },
     "cleanup" : [
@@ -36,7 +36,7 @@
     ],
     "modules" : [
         {
-            "name" : "my-gtk-text-editor",
+            "name" : "textedit",
             "builddir" : true,
             "buildsystem" : "meson",
             "sources" : [

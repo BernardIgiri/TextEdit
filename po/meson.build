@@ -1,1 +1,1 @@
-i18n.gettext('my-gtk-text-editor', preset: 'glib')
+i18n.gettext('textedit', preset: 'glib')

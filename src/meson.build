@@ -1,8 +1,8 @@
 pkgdatadir = join_paths(get_option('prefix'), get_option('datadir'), meson.project_name())
 gnome = import('gnome')
 
-gnome.compile_resources('my-gtk-text-editor',
-  'my_gtk_text_editor.gresource.xml',
+gnome.compile_resources('textedit',
+  'textedit.gresource.xml',
   gresource_bundle: true,
   install: true,
   install_dir: pkgdatadir,

@@ -441,18 +441,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "my-gtk-text-editor"
-version = "0.1.0"
-dependencies = [
- "gdk",
- "gettext-rs",
- "gio",
- "glib",
- "gtk",
- "tokio",
-]
-
-[[package]]
 name = "ntapi"
 version = "0.3.6"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -627,6 +615,18 @@ dependencies = [
  "proc-macro2",
  "quote",
  "unicode-xid",
+]
+
+[[package]]
+name = "textedit"
+version = "0.1.0"
+dependencies = [
+ "gdk",
+ "gettext-rs",
+ "gio",
+ "glib",
+ "gtk",
+ "tokio",
 ]
 
 [[package]]

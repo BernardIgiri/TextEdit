@@ -18,10 +18,10 @@ async fn main() {
     gtk::init().unwrap_or_else(|_| panic!("Failed to initialize GTK."));
 
     setlocale(LocaleCategory::LcAll, "");
-    bindtextdomain("my-gtk-text-editor", config::LOCALEDIR);
-    textdomain("my-gtk-text-editor");
+    bindtextdomain("textedit", config::LOCALEDIR);
+    textdomain("textedit");
 
-    let res = gio::Resource::load(config::PKGDATADIR.to_owned() + "/my-gtk-text-editor.gresource")
+    let res = gio::Resource::load(config::PKGDATADIR.to_owned() + "/textedit.gresource")
         .expect("Could not load resources");
     gio::resources_register(&res);
 

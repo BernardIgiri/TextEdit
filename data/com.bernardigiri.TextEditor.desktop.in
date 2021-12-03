@@ -1,6 +1,6 @@
 [Desktop Entry]
-Name=my-gtk-text-editor
-Exec=my-gtk-text-editor
+Name=textedit
+Exec=textedit
 Icon=com.bernardigiri.TextEditor
 Terminal=false
 Type=Application
