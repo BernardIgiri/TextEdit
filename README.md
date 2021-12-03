@@ -13,3 +13,4 @@ To learn gtk4-rs I used the following resources:
 - gtk4-rs Book: https://gtk-rs.org/gtk4-rs/git/book/
 - gtk4-rs Github: https://github.com/gtk-rs/gtk4-rs
 - Glade Tutorial: https://www.youtube.com/playlist?list=PLmMgHNtOIstZEvqYJncYUx52n8_OV0uWy
+- gtk-rs-channels (a cool MVC demo): https://github.com/alexislozano/gtk-rs-channels
