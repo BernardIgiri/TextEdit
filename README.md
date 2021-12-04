@@ -8,7 +8,7 @@ GUI software in Rust.
 ## Learning Resources
 
 - Rust GTK Overview: https://www.youtube.com/watch?v=0W2cJ42iiJs
-- gtk3-rs Book: https://gtk-rs.org/gtk3-rs/git/book/
+- gtk4-rs Book: https://gtk-rs.org/gtk4-rs/git/book/
 - gtk3-rs Github: https://github.com/gtk-rs/gtk3-rs
 - Glade Tutorial: https://www.youtube.com/playlist?list=PLmMgHNtOIstZEvqYJncYUx52n8_OV0uWy
 - gtk-rs-channels (a cool MVC demo): https://github.com/alexislozano/gtk-rs-channels
