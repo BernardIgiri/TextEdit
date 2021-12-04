@@ -6,7 +6,7 @@
     <property name="can-focus">False</property>
     <property name="type-hint">dialog</property>
     <property name="program-name">TextEdit</property>
-    <property name="comments" translatable="yes">Rust GTK4 Text Editor.</property>
+    <property name="comments" translatable="yes">Rust GTK3 Text Editor.</property>
     <property name="authors">Bernard Igiri</property>
     <property name="logo">resources/logo.svg</property>
     <property name="license-type">mit-x11</property>
